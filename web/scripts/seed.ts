@@ -45,7 +45,7 @@ export const CLIENTS = [
   { name: 'HARSCO India Pvt. Ltd.', location: 'Slag processing · Raigarh' },
 ];
 
-export const SERVICES = [
+export const SERVICES: { name: string; description?: string }[] = [
   { name: 'Infrastructure Development', description: 'RCC roads, drains, boundary walls' },
   { name: 'Sinter Plant Construction' },
   { name: 'Blast Furnace Construction' },
@@ -60,15 +60,16 @@ export const SERVICES = [
   { name: 'RMHS & Material Handling', description: 'Sinter & pellet plant circuits' },
 ];
 
-async function seed() {
+export async function seed() {
   console.log('Uploading ETP featured photo...');
   const featuredAsset = await uploadAsset(ETP_FEATURED_PHOTO);
 
   console.log('Creating projects...');
-  for (const p of PROJECTS) {
-    await client.create({ _type: 'project', ...p });
+  for (const [i, p] of PROJECTS.entries()) {
+    await client.createIfNotExists({ _id: `project-${i}`, _type: 'project', ...p });
   }
-  await client.create({
+  await client.createIfNotExists({
+    _id: 'project-etp',
     _type: 'project',
     title: 'Effluent Treatment Plant (ETP)',
     client: 'Confidential — industrial client',
@@ -79,19 +80,20 @@ async function seed() {
   });
 
   console.log('Creating clients...');
-  for (const c of CLIENTS) {
-    await client.create({ _type: 'client', ...c });
+  for (const [i, c] of CLIENTS.entries()) {
+    await client.createIfNotExists({ _id: `client-${i}`, _type: 'client', ...c });
   }
 
   console.log('Creating services...');
   for (const [i, s] of SERVICES.entries()) {
-    await client.create({ _type: 'service', ...s, order: i });
+    await client.createIfNotExists({ _id: `service-${i}`, _type: 'service', ...s, order: i });
   }
 
   console.log('Uploading gallery photos...');
-  for (const { file, caption } of ETP_GALLERY_FILES) {
+  for (const [i, { file, caption }] of ETP_GALLERY_FILES.entries()) {
     const asset = await uploadAsset(file);
-    await client.create({
+    await client.createIfNotExists({
+      _id: `gallery-${i}`,
       _type: 'galleryImage',
       caption,
       image: { _type: 'image', asset: { _type: 'reference', _ref: asset._id } },

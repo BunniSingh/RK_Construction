@@ -20,6 +20,14 @@ function makeRequest(body: unknown) {
   });
 }
 
+function makeRawRequest(rawBody: string) {
+  return new Request('http://localhost/api/contact', {
+    method: 'POST',
+    body: rawBody,
+    headers: { 'content-type': 'application/json' },
+  });
+}
+
 describe('POST /api/contact', () => {
   test('rejects a submission missing required fields', async () => {
     const res = await POST(makeRequest({ name: '', email: '', projectType: '', message: '' }));
@@ -55,5 +63,33 @@ describe('POST /api/contact', () => {
     expect(typeof body.error).toBe('string');
 
     sendMock.mockResolvedValueOnce({ id: 'test' });
+  });
+
+  test('rejects a non-JSON body with 400 instead of an unhandled parse error', async () => {
+    const res = await POST(makeRawRequest('not json at all'));
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.ok).toBe(false);
+  });
+
+  test('rejects an empty body with 400 instead of an unhandled parse error', async () => {
+    const res = await POST(makeRawRequest(''));
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.ok).toBe(false);
+  });
+
+  test('rejects a JSON body that is not an object (e.g. "null") with 400', async () => {
+    const res = await POST(makeRawRequest('null'));
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.ok).toBe(false);
+  });
+
+  test('rejects a non-string field instead of crashing on .trim()', async () => {
+    const res = await POST(makeRequest({ name: 123, email: 'priya@example.com', projectType: 'Other', message: 'Hi' }));
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.ok).toBe(false);
   });
 });

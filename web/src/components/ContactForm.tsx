@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from 'react';
 
 export function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -18,18 +18,25 @@ export function ContactForm() {
       email: String(data.get('email') || ''),
     };
 
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    const body = await res.json();
+    setStatus('sending');
 
-    if (res.ok && body.ok) {
-      setStatus('sent');
-    } else {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const body = await res.json();
+
+      if (res.ok && body.ok) {
+        setStatus('sent');
+      } else {
+        setStatus('error');
+        setError(body.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
       setStatus('error');
-      setError(body.error || 'Something went wrong. Please try again.');
+      setError('Could not reach the server. Please check your connection and try again.');
     }
   }
 
@@ -57,7 +64,9 @@ export function ContactForm() {
         </select>
       </div>
       <div className="field"><label htmlFor="message">Project details</label><textarea id="message" name="message" required /></div>
-      <button className="btn btn-solid" type="submit" style={{ alignSelf: 'flex-start' }}>Submit Inquiry &rarr;</button>
+      <button className="btn btn-solid" type="submit" disabled={status === 'sending'} style={{ alignSelf: 'flex-start' }}>
+        {status === 'sending' ? 'Sending…' : <>Submit Inquiry &rarr;</>}
+      </button>
       {status === 'error' && <div id="okmsg" role="alert">{error}</div>}
     </form>
   );

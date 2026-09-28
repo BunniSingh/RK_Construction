@@ -1,27 +1,32 @@
 import { sanityClient } from './sanity.client';
 import type { Project, Client, Service, GalleryImage, SiteSettings } from './types';
 
+async function safeFetch<T>(query: string, fallback: T): Promise<T> {
+  try {
+    const result = await sanityClient.fetch<T>(query);
+    return (result ?? fallback) as T;
+  } catch (err) {
+    console.error(`Sanity fetch failed for query "${query}":`, err);
+    return fallback;
+  }
+}
+
 export async function getProjects(): Promise<Project[]> {
-  const result = await sanityClient.fetch<Project[]>(`*[_type == "project"] | order(order asc)`);
-  return result ?? [];
+  return safeFetch<Project[]>(`*[_type == "project"] | order(order asc)`, []);
 }
 
 export async function getClients(): Promise<Client[]> {
-  const result = await sanityClient.fetch<Client[]>(`*[_type == "client"] | order(name asc)`);
-  return result ?? [];
+  return safeFetch<Client[]>(`*[_type == "client"] | order(name asc)`, []);
 }
 
 export async function getServices(): Promise<Service[]> {
-  const result = await sanityClient.fetch<Service[]>(`*[_type == "service"] | order(order asc)`);
-  return result ?? [];
+  return safeFetch<Service[]>(`*[_type == "service"] | order(order asc)`, []);
 }
 
 export async function getGalleryImages(): Promise<GalleryImage[]> {
-  const result = await sanityClient.fetch<GalleryImage[]>(`*[_type == "galleryImage"]`);
-  return result ?? [];
+  return safeFetch<GalleryImage[]>(`*[_type == "galleryImage"]`, []);
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
-  const result = await sanityClient.fetch<SiteSettings | null>(`*[_type == "siteSettings"][0]`);
-  return result ?? null;
+  return safeFetch<SiteSettings | null>(`*[_type == "siteSettings"][0]`, null);
 }

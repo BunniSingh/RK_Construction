@@ -1,27 +1,40 @@
 import { Resend } from 'resend';
 
 type ContactBody = {
-  name?: string;
-  company?: string;
-  projectType?: string;
-  message?: string;
-  email?: string;
+  name: string;
+  company: string;
+  projectType: string;
+  message: string;
+  email: string;
 };
 
-function validate(body: ContactBody): string | null {
-  if (!body.name?.trim()) return 'Name is required.';
-  if (!body.email?.includes('@')) return 'A valid email is required.';
-  if (!body.projectType?.trim()) return 'Project type is required.';
-  if (!body.message?.trim()) return 'Project details are required.';
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function validate(body: unknown): string | null {
+  if (typeof body !== 'object' || body === null) return 'Invalid request.';
+  const b = body as Record<string, unknown>;
+  if (!isNonEmptyString(b.name)) return 'Name is required.';
+  if (!isNonEmptyString(b.email) || !b.email.includes('@')) return 'A valid email is required.';
+  if (!isNonEmptyString(b.projectType)) return 'Project type is required.';
+  if (!isNonEmptyString(b.message)) return 'Project details are required.';
   return null;
 }
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as ContactBody;
-  const error = validate(body);
+  let parsed: unknown;
+  try {
+    parsed = await request.json();
+  } catch {
+    return Response.json({ ok: false, error: 'Invalid request body.' }, { status: 400 });
+  }
+
+  const error = validate(parsed);
   if (error) {
     return Response.json({ ok: false, error }, { status: 400 });
   }
+  const body = parsed as ContactBody;
 
   const resend = new Resend(process.env.RESEND_API_KEY);
   try {

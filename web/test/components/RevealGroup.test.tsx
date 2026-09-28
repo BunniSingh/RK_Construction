@@ -36,3 +36,18 @@ test('applies a caller-provided className to the wrapper alongside reveal', () =
   const wrapper = container.querySelector('.reveal');
   expect(wrapper).toHaveClass('overview-grid');
 });
+
+test('applies the stagger index directly to each child, without introducing a wrapper element', () => {
+  const { container } = render(
+    <RevealGroup>
+      <p>First</p>
+      <p>Second</p>
+    </RevealGroup>
+  );
+  const revealEl = container.querySelector('.reveal')!;
+  expect(revealEl.children).toHaveLength(2);
+  expect(revealEl.children[0].tagName).toBe('P');
+  expect(revealEl.children[0].textContent).toBe('First');
+  expect(revealEl.children[1].tagName).toBe('P');
+  expect((revealEl.children[1] as HTMLElement).style.getPropertyValue('--i')).toBe('1');
+});

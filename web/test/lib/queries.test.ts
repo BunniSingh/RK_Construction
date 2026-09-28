@@ -7,6 +7,18 @@ vi.mock('@/lib/sanity.client', () => ({
 import { sanityClient } from '@/lib/sanity.client';
 import { getProjects, getSiteSettings } from '@/lib/queries';
 
+describe('when the Sanity fetch itself fails (bad credentials, dataset not found, outage)', () => {
+  test('getProjects falls back to an empty array instead of throwing', async () => {
+    (sanityClient.fetch as any).mockRejectedValueOnce(new Error('Dataset not found'));
+    await expect(getProjects()).resolves.toEqual([]);
+  });
+
+  test('getSiteSettings falls back to null instead of throwing', async () => {
+    (sanityClient.fetch as any).mockRejectedValueOnce(new Error('Dataset not found'));
+    await expect(getSiteSettings()).resolves.toBeNull();
+  });
+});
+
 describe('getProjects', () => {
   test('returns the array Sanity provides', async () => {
     (sanityClient.fetch as any).mockResolvedValueOnce([{ title: 'ETP' }]);

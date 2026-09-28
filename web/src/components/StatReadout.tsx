@@ -1,19 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatCount } from '@/lib/countUp';
 
 export type Stat = { target: number; prefix?: string; suffix?: string; label: string };
 
 function Cell({ stat }: { stat: Stat }) {
-  const [progress, setProgress] = useState(0);
+  // Starts at the final value so SSR output (and the first client render,
+  // before this effect runs) always shows the real number — never a zero
+  // a no-JS visitor or crawler would be stuck with.
+  const [progress, setProgress] = useState(1);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
-      setProgress(1);
-      return;
-    }
+    if (reduceMotion) return;
+    setProgress(0);
     let raf = 0;
     let start: number | null = null;
     const duration = 900;

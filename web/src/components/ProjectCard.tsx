@@ -6,7 +6,7 @@ export function ProjectCard({ project, code }: { project: Project; code: string 
   return (
     <article className="proj-card">
       <ImagePlate
-        src={urlFor(project.photo)}
+        src={urlFor(project.photo, 800)}
         alt={`Site photo — ${project.title}`}
         caption={`Photo pending — ${code}`}
       />

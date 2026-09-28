@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Children, cloneElement, isValidElement, useEffect, useRef, useState, type ReactElement } from 'react';
 
 export function RevealGroup({
   children,
@@ -30,16 +30,17 @@ export function RevealGroup({
     return () => io.disconnect();
   }, []);
 
-  const items = Array.isArray(children) ? children : [children];
   const wrapperClass = `reveal${inView ? ' in-view' : ''}${className ? ` ${className}` : ''}`;
 
   return (
     <div ref={ref} className={wrapperClass}>
-      {items.map((child, i) => (
-        <div key={i} style={{ ['--i' as string]: i }}>
-          {child}
-        </div>
-      ))}
+      {Children.map(children, (child, i) => {
+        if (!isValidElement(child)) return child;
+        const el = child as ReactElement<{ style?: React.CSSProperties }>;
+        return cloneElement(el, {
+          style: { ...el.props.style, ['--i' as string]: i },
+        });
+      })}
     </div>
   );
 }
