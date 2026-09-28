@@ -35,7 +35,10 @@ approved mockup:
 3. **Mission & Vision**
 4. **Core Values** — Excellence, Integrity, Safety, Planning & Deliverables
 5. **Services** — 12 service categories drawn from the profile
-6. **Projects** — 6 named projects (client, location, category, photo)
+6. **Projects** — 7 named projects (client, location, category, photo):
+   the original 6 from the profile PDF, plus **Effluent Treatment Plant
+   (ETP)**, added because real construction photography for it now exists
+   (see Section 6)
 7. **Clients** — 5 key clients (name, location)
 8. **Site Gallery** — photo grid (6 placeholder slots initially)
 9. **Contact** — address, phone, email, inquiry form
@@ -76,14 +79,31 @@ Carried over from the approved mockup ("engineering drawing set" concept):
   (`localStorage`) and takes precedence over the dark default on return
   visits.
 
-## 6. Placeholder Imagery (no real photos yet)
+## 6. Placeholder Imagery, and Real ETP Photography
 
-Until RKC supplies real photography, every image slot (project photo, client
-logo, gallery image) that has no uploaded Sanity asset renders the existing
-**hatch-pattern "photo pending" plate** component from the mockup (cross-hatch
-fill, corner registration marks, mono caption) instead of stock/dummy photos.
-This is implemented as a genuine fallback in the image component — not
-seeded fake data — so:
+RKC has supplied real construction photography for one project: **44 photos
++ 2 videos of the Effluent Treatment Plant (ETP) build**, in `media/` at the
+project root (drone/aerial shots of the finished plant, RCC tank and
+clarifier formwork mid-pour, rebar/footing work, and a full-crew safety
+briefing). These are genuine site photos, not stock imagery.
+
+Plan for this asset set:
+- A curated subset (~8-10 of the strongest, most distinct shots — the drone
+  aerial, the tank formwork pour, the safety briefing, a rebar/footing shot)
+  is uploaded to Sanity as real assets: one becomes the featured photo for
+  the new **ETP project card** (Section 3), and the rest populate several of
+  the **Site Gallery** slots.
+- The remaining photos and both videos stay in `media/` as a raw archive RKC
+  can draw on later (e.g. for social media), without cluttering the seeded
+  CMS content.
+- Video embedding is out of scope for this iteration (Section 9) — the two
+  `.mp4` files are archived, not embedded on the site yet.
+
+For every other project, client, and gallery slot with **no real photo yet**,
+the image slot renders the existing **hatch-pattern "photo pending" plate**
+component from the mockup (cross-hatch fill, corner registration marks, mono
+caption) instead of stock/dummy photos. This is implemented as a genuine
+fallback in the image component — not seeded fake data — so:
 
 - The mockup's visual language carries straight into the real site.
 - The moment staff upload a real photo in Sanity Studio, it replaces the
