@@ -66,3 +66,16 @@ section[id] { scroll-margin-top: 78px; }
     transition-duration: 0.001ms !important;
   }
 }
+
+.theme-toggle {
+  position: relative; width: 38px; height: 38px; flex: none; border-radius: 2px;
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: border-color .3s ease, color .3s ease;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle svg { position: absolute; transition: opacity .35s ease, transform .5s ease; }
+.theme-toggle .moon { opacity: 0; transform: rotate(-70deg) scale(.4); }
+.theme-toggle .sun { opacity: 1; transform: rotate(0) scale(1); }
+[data-theme='light'] .theme-toggle .sun { opacity: 0; transform: rotate(70deg) scale(.4); }
+[data-theme='light'] .theme-toggle .moon { opacity: 1; transform: rotate(0) scale(1); }
