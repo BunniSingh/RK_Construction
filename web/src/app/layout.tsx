@@ -1,4 +1,5 @@
 import './globals.css';
+import { SiteChrome } from '@/components/SiteChrome';
 
 export const metadata = {
   title: 'R.K. Constructions',
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <SiteChrome>{children}</SiteChrome>
+      </body>
     </html>
   );
 }
