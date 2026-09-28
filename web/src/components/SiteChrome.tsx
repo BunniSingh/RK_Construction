@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import type { SiteSettings } from '@/lib/types';
 import { Nav } from './Nav';
 import { Footer } from './Footer';
+import { MobileActionBar } from './MobileActionBar';
 import { ScrollProgress } from './ScrollProgress';
 
 export function SiteChrome({ children, settings }: { children: React.ReactNode; settings: SiteSettings | null }) {
@@ -19,6 +20,7 @@ export function SiteChrome({ children, settings }: { children: React.ReactNode; 
       <Nav />
       {children}
       <Footer settings={settings} />
+      <MobileActionBar settings={settings} />
     </>
   );
 }

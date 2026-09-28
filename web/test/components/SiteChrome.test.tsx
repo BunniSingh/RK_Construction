@@ -16,10 +16,11 @@ test('hides Nav and Footer chrome on the /studio route', () => {
     </SiteChrome>
   );
   expect(screen.queryByText('R.K. Constructions')).toBeNull();
+  expect(screen.queryByRole('navigation', { name: /quick contact/i })).toBeNull();
   expect(screen.getByText('content')).toBeInTheDocument();
 });
 
-test('shows Nav and Footer chrome on marketing pages', () => {
+test('shows Nav, Footer, and the mobile action bar on marketing pages', () => {
   mockUsePathname.mockReturnValue('/');
   render(
     <SiteChrome settings={null}>
@@ -27,5 +28,6 @@ test('shows Nav and Footer chrome on marketing pages', () => {
     </SiteChrome>
   );
   expect(screen.getAllByText('R.K. Constructions').length).toBeGreaterThan(0);
+  expect(screen.getByRole('navigation', { name: /quick contact/i })).toBeInTheDocument();
   expect(screen.getByText('content')).toBeInTheDocument();
 });
