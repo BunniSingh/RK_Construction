@@ -7,16 +7,25 @@ test('renders fallback fact values when siteSettings has not been created yet', 
   expect(screen.getByText(/Raigarh, CG/)).toBeInTheDocument();
 });
 
+test('does not show an equipment count, showing core expertise instead', () => {
+  render(<Overview settings={null} />);
+  expect(screen.queryByText(/Ajax/)).toBeNull();
+  expect(screen.queryByText(/JCB/)).toBeNull();
+  expect(screen.getByText('Core expertise')).toBeInTheDocument();
+  expect(screen.getByText('Steel Plants, ETPs & RCC Works')).toBeInTheDocument();
+});
+
 test('renders values from siteSettings when provided', () => {
   render(
     <Overview
       settings={{
         workforceCount: '450+ (variable)',
         engineeringStaffCount: '20+ engineers',
-        machineryList: '3 Ajax · 3 JCB · 2 Excavator',
+        coreExpertise: 'Sinter Plants & Water Treatment',
         annualProjectValue: '₹15 Cr+',
       }}
     />
   );
   expect(screen.getByText('450+ (variable)')).toBeInTheDocument();
+  expect(screen.getByText('Sinter Plants & Water Treatment')).toBeInTheDocument();
 });

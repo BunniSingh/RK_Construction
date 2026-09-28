@@ -112,7 +112,7 @@ export async function seed() {
     _type: 'siteSettings',
     workforceCount: '300+ (variable)',
     engineeringStaffCount: '15+ engineers',
-    machineryList: '2 Ajax · 2 JCB · 1 Excavator',
+    coreExpertise: 'Steel Plants, ETPs & RCC Works',
     annualProjectValue: '₹10 Cr+',
     address: 'House No. 24, Bhagwanpur Uper Basti, Jindal Road, Raigarh, CG',
     phone: '+91 97524 50852',

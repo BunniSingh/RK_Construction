@@ -9,7 +9,7 @@ export default defineType({
     defineField({ name: 'vision', type: 'text' }),
     defineField({ name: 'workforceCount', type: 'string' }),
     defineField({ name: 'engineeringStaffCount', type: 'string' }),
-    defineField({ name: 'machineryList', type: 'string' }),
+    defineField({ name: 'coreExpertise', type: 'string' }),
     defineField({ name: 'annualProjectValue', type: 'string' }),
     defineField({ name: 'address', type: 'string' }),
     defineField({ name: 'phone', type: 'string' }),

@@ -4,7 +4,7 @@ import { RevealGroup } from './RevealGroup';
 const FALLBACK = {
   workforceCount: '300+ (variable)',
   engineeringStaffCount: '15+ engineers',
-  machineryList: '2 Ajax · 2 JCB · 1 Excavator',
+  coreExpertise: 'Steel Plants, ETPs & RCC Works',
   annualProjectValue: '₹10 Cr+',
 };
 
@@ -28,7 +28,7 @@ export function Overview({ settings }: { settings: SiteSettings | null }) {
             <div className="row"><span className="k">Headquarters</span><span className="v">Raigarh, CG</span></div>
             <div className="row"><span className="k">Workforce</span><span className="v">{s.workforceCount}</span></div>
             <div className="row"><span className="k">Technical staff</span><span className="v">{s.engineeringStaffCount}</span></div>
-            <div className="row"><span className="k">Plant &amp; machinery</span><span className="v">{s.machineryList}</span></div>
+            <div className="row"><span className="k">Core expertise</span><span className="v">{s.coreExpertise}</span></div>
             <div className="row"><span className="k">Annual project value</span><span className="v">{s.annualProjectValue}</span></div>
           </div>
         </RevealGroup>

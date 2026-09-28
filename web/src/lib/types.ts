@@ -34,7 +34,7 @@ export type SiteSettings = {
   vision?: string;
   workforceCount?: string;
   engineeringStaffCount?: string;
-  machineryList?: string;
+  coreExpertise?: string;
   annualProjectValue?: string;
   address?: string;
   phone?: string;
