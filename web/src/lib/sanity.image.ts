@@ -6,5 +6,11 @@ const builder = imageUrlBuilder(sanityClient);
 
 export function urlFor(source?: Image | null): string | null {
   if (!source) return null;
-  return builder.image(source).auto('format').url();
+  try {
+    return builder.image(source).auto('format').url();
+  } catch {
+    // Malformed or incomplete image reference (e.g. an asset that was
+    // removed in Sanity) — fall back to the placeholder like a missing image.
+    return null;
+  }
 }
