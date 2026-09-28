@@ -238,3 +238,24 @@ section { padding-block: 64px; border-bottom: 1px solid var(--line); }
 .value-row .clause-no { font-family: 'IBM Plex Mono'; font-size: 14px; color: var(--muted); padding-top: 3px; }
 .value-row h3 { font-size: 19px; margin-bottom: 6px; letter-spacing: 0.02em; }
 .value-row p { color: var(--muted); font-size: 14.5px; max-width: 62ch; }
+
+/* ---------- services ---------- */
+.services-head { max-width: 70ch; margin-bottom: 34px; }
+.services-head h2 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 14px; }
+.services-head p { color: var(--muted); }
+.svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+@media (min-width: 640px) { .svc-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 960px) { .svc-grid { grid-template-columns: repeat(4, 1fr); } }
+.svc-card { background: var(--surface); padding: 20px 16px; min-height: 118px; display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 0; }
+.svc-card:hover { transform: translateY(-3px); box-shadow: 0 12px 20px -14px rgba(0, 0, 0, .3); z-index: 1; }
+.svc-card .idx { font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent); }
+.svc-card .t { font-size: 14.5px; font-weight: 700; margin-top: 14px; line-height: 1.25; }
+.svc-card .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* ---------- clients ---------- */
+.client-wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+@media (min-width: 700px) { .client-wall { grid-template-columns: repeat(3, 1fr); } }
+.client-cell { background: var(--surface); padding: 26px 18px; display: flex; flex-direction: column; gap: 6px; min-height: 104px; justify-content: center; position: relative; z-index: 0; }
+.client-cell:hover { background: var(--surface-2); transform: translateY(-3px); box-shadow: 0 12px 20px -14px rgba(0, 0, 0, .28); z-index: 1; }
+.client-cell .cname { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 19px; line-height: 1.05; }
+.client-cell .cloc { font-family: 'IBM Plex Mono'; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
