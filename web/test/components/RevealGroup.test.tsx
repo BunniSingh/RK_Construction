@@ -26,3 +26,13 @@ test('falls back to fully visible when IntersectionObserver is unavailable', () 
 
   window.IntersectionObserver = original;
 });
+
+test('applies a caller-provided className to the wrapper alongside reveal', () => {
+  const { container } = render(
+    <RevealGroup className="overview-grid">
+      <p>Child</p>
+    </RevealGroup>
+  );
+  const wrapper = container.querySelector('.reveal');
+  expect(wrapper).toHaveClass('overview-grid');
+});

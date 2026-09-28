@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-export function RevealGroup({ children }: { children: React.ReactNode }) {
+export function RevealGroup({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(typeof IntersectionObserver === 'undefined');
 
@@ -25,9 +31,10 @@ export function RevealGroup({ children }: { children: React.ReactNode }) {
   }, []);
 
   const items = Array.isArray(children) ? children : [children];
+  const wrapperClass = `reveal${inView ? ' in-view' : ''}${className ? ` ${className}` : ''}`;
 
   return (
-    <div ref={ref} className={`reveal${inView ? ' in-view' : ''}`}>
+    <div ref={ref} className={wrapperClass}>
       {items.map((child, i) => (
         <div key={i} style={{ ['--i' as string]: i }}>
           {child}
