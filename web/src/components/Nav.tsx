@@ -1,12 +1,20 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ThemeToggle';
 
 export function Nav() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   useEffect(() => {
     document.documentElement.classList.add('js');
   }, []);
+
+  function sectionHref(id: string) {
+    return isHome ? `#${id}` : `/#${id}`;
+  }
 
   return (
     <header className="nav">
@@ -22,15 +30,15 @@ export function Nav() {
           </div>
         </div>
         <nav className="nav-links">
-          <a href="#overview">Overview</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Projects</a>
-          <a href="#clients">Clients</a>
+          <a href={sectionHref('overview')}>Overview</a>
+          <a href={sectionHref('services')}>Services</a>
+          <a href={sectionHref('projects')}>Projects</a>
+          <a href={sectionHref('clients')}>Clients</a>
         </nav>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <ThemeToggle />
-          <a className="btn btn-ghost" href="#gallery">Site Gallery</a>
-          <a className="btn btn-solid" href="#contact">Request a Proposal</a>
+          <a className="btn btn-ghost" href={sectionHref('gallery')}>Site Gallery</a>
+          <a className="btn btn-solid" href={sectionHref('contact')}>Request a Proposal</a>
         </div>
       </div>
     </header>
