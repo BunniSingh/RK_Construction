@@ -6,7 +6,10 @@ import Image from 'next/image';
 type Props = {
   src?: string | null;
   alt: string;
+  /** Shown only on the placeholder plate (e.g. "Photo pending — P-05"). */
   caption: string;
+  /** Shown as an overlay once a real photo is displayed. Omit to show no overlay on real photos. */
+  photoCaption?: string;
 };
 
 function Placeholder({ alt, caption }: { alt: string; caption: string }) {
@@ -19,7 +22,7 @@ function Placeholder({ alt, caption }: { alt: string; caption: string }) {
   );
 }
 
-export function ImagePlate({ src, alt, caption }: Props) {
+export function ImagePlate({ src, alt, caption, photoCaption }: Props) {
   const [failed, setFailed] = useState(false);
 
   if (!src || failed) {
@@ -37,7 +40,7 @@ export function ImagePlate({ src, alt, caption }: Props) {
         style={{ objectFit: 'cover' }}
         onError={() => setFailed(true)}
       />
-      <div className="cap">{caption}</div>
+      {photoCaption && <div className="cap">{photoCaption}</div>}
     </div>
   );
 }

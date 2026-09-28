@@ -10,7 +10,7 @@ export function Gallery({ images }: { images: GalleryImage[] }) {
         <div className="sheet-label">Sheet 07 / 08 &mdash; Site Gallery</div>
         <RevealGroup className="gal-grid">
           {images.map((img) => (
-            <ImagePlate key={img._id} src={urlFor(img.image, 600)} alt={img.caption} caption={img.caption} />
+            <ImagePlate key={img._id} src={urlFor(img.image, 600)} alt={img.caption} caption={img.caption} photoCaption={img.caption} />
           ))}
         </RevealGroup>
       </div>

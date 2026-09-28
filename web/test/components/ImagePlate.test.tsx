@@ -25,3 +25,14 @@ test('falls back to the placeholder if the image fails to load (broken asset ref
   expect(container.querySelector('img')).toBeNull();
   expect(screen.getByText('Photo pending — P-04')).toBeInTheDocument();
 });
+
+test('does not show the placeholder caption once a real photo is showing', () => {
+  render(<ImagePlate src="/photo.jpg" alt="Site photo" caption="Photo pending — P-05" />);
+  expect(screen.queryByText('Photo pending — P-05')).toBeNull();
+});
+
+test('shows a real caption over the real photo when photoCaption is provided', () => {
+  render(<ImagePlate src="/photo.jpg" alt="Site photo" caption="Photo pending — X" photoCaption="Rebar & footing work — ETP site" />);
+  expect(screen.getByText('Rebar & footing work — ETP site')).toBeInTheDocument();
+  expect(screen.queryByText('Photo pending — X')).toBeNull();
+});
