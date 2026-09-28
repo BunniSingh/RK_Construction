@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { Project } from '@/lib/types';
 import { ImagePlate } from './ImagePlate';
 import { urlFor } from '@/lib/sanity.image';
@@ -17,10 +18,15 @@ export function ProjectModal({ project, code, onClose }: Props) {
       if (e.key === 'Escape') onClose();
     }
     document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" onClick={onClose}>
       <div
         className="modal-dialog"
@@ -50,6 +56,7 @@ export function ProjectModal({ project, code, onClose }: Props) {
           {project.description && <p className="modal-description">{project.description}</p>}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

@@ -37,10 +37,24 @@ test('calls onClose when the close button is clicked', async () => {
 
 test('calls onClose when the backdrop (outside the dialog content) is clicked', async () => {
   const onClose = vi.fn();
-  const { container } = render(<ProjectModal project={PROJECT} code="P-01" onClose={onClose} />);
-  const backdrop = container.querySelector('.modal-backdrop')!;
+  render(<ProjectModal project={PROJECT} code="P-01" onClose={onClose} />);
+  const backdrop = document.querySelector('.modal-backdrop')!;
   await userEvent.click(backdrop);
   expect(onClose).toHaveBeenCalledTimes(1);
+});
+
+test('renders into document.body via a portal so no ancestor can trap its z-index', () => {
+  const { container } = render(<ProjectModal project={PROJECT} code="P-01" onClose={() => {}} />);
+  expect(container.querySelector('.modal-backdrop')).toBeNull();
+  expect(document.body.querySelector('.modal-backdrop')).not.toBeNull();
+});
+
+test('locks page scroll while open and restores it when closed', () => {
+  document.body.style.overflow = 'auto';
+  const { unmount } = render(<ProjectModal project={PROJECT} code="P-01" onClose={() => {}} />);
+  expect(document.body.style.overflow).toBe('hidden');
+  unmount();
+  expect(document.body.style.overflow).toBe('auto');
 });
 
 test('does not call onClose when clicking inside the dialog content', async () => {
