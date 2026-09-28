@@ -6,7 +6,7 @@ export function Services({ services }: { services: Service[] }) {
     <section id="services">
       <div className="wrap">
         <div className="sheet-label">Services</div>
-        <div className="services-head">
+        <div className="section-head">
           <h2>Full-spectrum industrial construction.</h2>
           <p>A decade building integrated steel plants — from conceptual design and engineering through construction and ongoing maintenance.</p>
         </div>

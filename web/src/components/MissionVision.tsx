@@ -9,6 +9,10 @@ export function MissionVision({ settings }: { settings: SiteSettings | null }) {
     <section id="mission">
       <div className="wrap">
         <div className="sheet-label">Mission &amp; Vision</div>
+        <div className="section-head">
+          <h2>What drives every project.</h2>
+          <p>Two commitments that shape how we plan, build, and hand over every site — from first excavation to final commissioning.</p>
+        </div>
         <RevealGroup className="mv-grid">
           <div className="mv-card">
             <span className="clause">01 &mdash; Mission</span>

@@ -7,6 +7,12 @@ test('renders each client name and location', () => {
   expect(screen.getByText('Raigarh, CG')).toBeInTheDocument();
 });
 
+test('renders a section heading and sub-heading paragraph above the client wall', () => {
+  render(<Clients clients={[]} />);
+  expect(screen.getByRole('heading', { name: "Trusted by India's steel and power majors." })).toBeInTheDocument();
+  expect(screen.getByText(/A client base built on repeat business/)).toBeInTheDocument();
+});
+
 test('does not render a logo image when the client has none', () => {
   const { container } = render(<Clients clients={[{ _id: '1', name: 'JSW Steel', location: 'Raigarh, CG' }]} />);
   expect(container.querySelector('img')).toBeNull();

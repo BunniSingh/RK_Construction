@@ -6,6 +6,10 @@ export function Projects({ projects }: { projects: Project[] }) {
     <section id="projects">
       <div className="wrap">
         <div className="sheet-label">Selected Projects</div>
+        <div className="section-head">
+          <h2>Work that speaks for itself.</h2>
+          <p>A selection of completed and ongoing industrial builds across Chhattisgarh&apos;s steel and power corridor.</p>
+        </div>
         {projects.length === 0 ? (
           <p className="mono" style={{ color: 'var(--muted)' }}>Project records are being updated — check back shortly.</p>
         ) : (

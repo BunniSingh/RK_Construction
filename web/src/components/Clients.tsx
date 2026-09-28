@@ -8,6 +8,10 @@ export function Clients({ clients }: { clients: Client[] }) {
     <section id="clients">
       <div className="wrap">
         <div className="sheet-label">Key Clients</div>
+        <div className="section-head">
+          <h2>Trusted by India&apos;s steel and power majors.</h2>
+          <p>A client base built on repeat business — plants that call us back project after project.</p>
+        </div>
         {clients.length === 0 ? (
           <p className="mono" style={{ color: 'var(--muted)' }}>Client list is being updated — check back shortly.</p>
         ) : (

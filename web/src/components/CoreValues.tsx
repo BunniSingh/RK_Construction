@@ -12,6 +12,10 @@ export function CoreValues() {
     <section id="values">
       <div className="wrap">
         <div className="sheet-label">Core Values</div>
+        <div className="section-head">
+          <h2>The standards we build to.</h2>
+          <p>Four principles that govern how our teams operate on every site, from tender to handover.</p>
+        </div>
         <RevealGroup className="values-list">
           {VALUES.map((v) => (
             <div className="value-row" key={v.no}>

@@ -13,3 +13,9 @@ test('renders a caption for each gallery image', () => {
   expect(screen.getByText('ETP aerial view — Raigarh')).toBeInTheDocument();
   expect(screen.getByText('Tank formwork — ETP site')).toBeInTheDocument();
 });
+
+test('renders a section heading and sub-heading paragraph above the gallery grid', () => {
+  render(<Gallery images={[]} />);
+  expect(screen.getByRole('heading', { name: 'Inside an active site.' })).toBeInTheDocument();
+  expect(screen.getByText(/Real photographs from our ongoing ETP and industrial works/)).toBeInTheDocument();
+});
