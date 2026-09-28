@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx --env-file=.env.local scripts/seed.ts"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",
