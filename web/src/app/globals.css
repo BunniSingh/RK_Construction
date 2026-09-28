@@ -259,3 +259,17 @@ section { padding-block: 64px; border-bottom: 1px solid var(--line); }
 .client-cell:hover { background: var(--surface-2); transform: translateY(-3px); box-shadow: 0 12px 20px -14px rgba(0, 0, 0, .28); z-index: 1; }
 .client-cell .cname { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 19px; line-height: 1.05; }
 .client-cell .cloc { font-family: 'IBM Plex Mono'; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ---------- projects ---------- */
+.proj-grid { display: grid; grid-template-columns: 1fr; gap: 22px; }
+@media (min-width: 700px) { .proj-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1040px) { .proj-grid { grid-template-columns: repeat(3, 1fr); } }
+.proj-card { background: var(--surface); border: 1px solid var(--line); }
+.proj-card:hover { transform: translateY(-5px); box-shadow: 0 16px 28px -18px rgba(0, 0, 0, .35); border-color: var(--line-strong); }
+.proj-body { padding: 16px 16px 18px; }
+.proj-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.proj-code { font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent); }
+.proj-cat { font-family: 'IBM Plex Mono'; font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.proj-title { font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 20px; text-transform: none; margin-bottom: 10px; line-height: 1.05; overflow-wrap: break-word; }
+.proj-meta { display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.proj-meta .k { font-family: 'IBM Plex Mono'; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--steel); margin-right: 6px; }
