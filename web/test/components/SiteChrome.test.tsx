@@ -11,7 +11,7 @@ import { SiteChrome } from '@/components/SiteChrome';
 test('hides Nav and Footer chrome on the /studio route', () => {
   mockUsePathname.mockReturnValue('/studio');
   render(
-    <SiteChrome>
+    <SiteChrome settings={null}>
       <div>content</div>
     </SiteChrome>
   );
@@ -22,10 +22,10 @@ test('hides Nav and Footer chrome on the /studio route', () => {
 test('shows Nav and Footer chrome on marketing pages', () => {
   mockUsePathname.mockReturnValue('/');
   render(
-    <SiteChrome>
+    <SiteChrome settings={null}>
       <div>content</div>
     </SiteChrome>
   );
-  expect(screen.getByText('R.K. Constructions')).toBeInTheDocument();
+  expect(screen.getAllByText('R.K. Constructions').length).toBeGreaterThan(0);
   expect(screen.getByText('content')).toBeInTheDocument();
 });

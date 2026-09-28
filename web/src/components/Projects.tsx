@@ -5,7 +5,7 @@ export function Projects({ projects }: { projects: Project[] }) {
   return (
     <section id="projects">
       <div className="wrap">
-        <div className="sheet-label">Sheet 05 / 08 &mdash; Selected Projects</div>
+        <div className="sheet-label">Selected Projects</div>
         {projects.length === 0 ? (
           <p className="mono" style={{ color: 'var(--muted)' }}>Project records are being updated — check back shortly.</p>
         ) : (

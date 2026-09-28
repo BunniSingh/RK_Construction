@@ -13,7 +13,7 @@ export function Contact({ settings }: { settings: SiteSettings | null }) {
   return (
     <section id="contact" style={{ borderBottom: 'none' }}>
       <div className="wrap">
-        <div className="sheet-label">Sheet 08 / 08 &mdash; Contact</div>
+        <div className="sheet-label">Contact</div>
         <RevealGroup className="contact-grid">
           <div className="contact-info">
             <h2 style={{ fontSize: 'clamp(26px,4vw,36px)', marginBottom: 18 }}>Start a proposal.</h2>

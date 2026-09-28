@@ -11,7 +11,7 @@ export function CoreValues() {
   return (
     <section id="values">
       <div className="wrap">
-        <div className="sheet-label">Sheet 03 / 08 &mdash; Core Values</div>
+        <div className="sheet-label">Core Values</div>
         <RevealGroup className="values-list">
           {VALUES.map((v) => (
             <div className="value-row" key={v.no}>

@@ -13,7 +13,7 @@ export function Overview({ settings }: { settings: SiteSettings | null }) {
   return (
     <section id="overview">
       <div className="wrap">
-        <div className="sheet-label">Sheet 01 / 08 &mdash; Overview</div>
+        <div className="sheet-label">Overview</div>
         <RevealGroup className="overview-grid">
           <div className="overview">
             <h2>Precision, at industrial scale.</h2>

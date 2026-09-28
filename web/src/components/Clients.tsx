@@ -7,7 +7,7 @@ export function Clients({ clients }: { clients: Client[] }) {
   return (
     <section id="clients">
       <div className="wrap">
-        <div className="sheet-label">Sheet 06 / 08 &mdash; Key Clients</div>
+        <div className="sheet-label">Key Clients</div>
         {clients.length === 0 ? (
           <p className="mono" style={{ color: 'var(--muted)' }}>Client list is being updated — check back shortly.</p>
         ) : (
@@ -21,8 +21,10 @@ export function Clients({ clients }: { clients: Client[] }) {
                       <Image src={logoUrl} alt={`${c.name} logo`} width={120} height={48} unoptimized style={{ objectFit: 'contain', width: 'auto', height: '100%' }} />
                     </div>
                   )}
-                  <div className="cname">{c.name}</div>
-                  {c.location && <div className="cloc">{c.location}</div>}
+                  <div className="ctext">
+                    <div className="cname">{c.name}</div>
+                    {c.location && <div className="cloc">{c.location}</div>}
+                  </div>
                 </div>
               );
             })}

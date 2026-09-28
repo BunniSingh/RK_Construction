@@ -8,7 +8,7 @@ export function MissionVision({ settings }: { settings: SiteSettings | null }) {
   return (
     <section id="mission">
       <div className="wrap">
-        <div className="sheet-label">Sheet 02 / 08 &mdash; Mission &amp; Vision</div>
+        <div className="sheet-label">Mission &amp; Vision</div>
         <RevealGroup className="mv-grid">
           <div className="mv-card">
             <span className="clause">01 &mdash; Mission</span>

@@ -1,5 +1,6 @@
 import './globals.css';
 import { SiteChrome } from '@/components/SiteChrome';
+import { getSiteSettings } from '@/lib/queries';
 
 export const metadata = {
   title: 'R.K. Constructions',
@@ -15,14 +16,15 @@ try {
 } catch (e) {}
 `;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings();
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       </head>
       <body>
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome settings={settings}>{children}</SiteChrome>
       </body>
     </html>
   );
