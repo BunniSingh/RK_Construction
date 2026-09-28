@@ -21,6 +21,12 @@ export const ETP_GALLERY_FILES = [
   { file: 'WhatsApp Image 2026-09-28 at 11.56.42 AM.jpeg', caption: 'Survey & layout marking — ETP site' },
   { file: 'WhatsApp Image 2026-09-28 at 11.56.51 AM.jpeg', caption: 'Site overview — ETP plant structure' },
   { file: 'WhatsApp Image 2026-09-28 at 11.57.00 AM.jpeg', caption: 'Night concrete pour — ETP site' },
+  { file: 'WhatsApp Image 2026-09-28 at 11.56.39 AM.jpeg', caption: 'Site excavation & earthwork — ETP site' },
+  { file: 'WhatsApp Image 2026-09-28 at 11.56.45 AM.jpeg', caption: 'Tank formwork with scaffolding — ETP site' },
+  { file: 'WhatsApp Image 2026-09-28 at 11.56.48 AM.jpeg', caption: 'Clarifier tank walls near completion — ETP site' },
+  { file: 'WhatsApp Image 2026-09-28 at 11.57.02 AM.jpeg', caption: 'Site layout marking — ETP site' },
+  { file: 'WhatsApp Image 2026-09-28 at 11.57.03 AM.jpeg', caption: 'Foundation pit excavation — ETP site' },
+  { file: 'WhatsApp Image 2026-09-28 at 11.56.58 AM.jpeg', caption: 'Safety toolbox talk — ETP crew' },
 ];
 
 async function uploadAsset(filename: string) {

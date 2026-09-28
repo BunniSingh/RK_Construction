@@ -13,5 +13,5 @@ test('seed data matches the spec counts (6 base projects + ETP = 7, 5 clients, 1
   expect(PROJECTS).toHaveLength(6);
   expect(CLIENTS).toHaveLength(5);
   expect(SERVICES).toHaveLength(12);
-  expect(ETP_GALLERY_FILES).toHaveLength(6);
+  expect(ETP_GALLERY_FILES).toHaveLength(12);
 });

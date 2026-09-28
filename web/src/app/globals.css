@@ -299,3 +299,41 @@ form { background: var(--surface); border: 1px solid var(--line); padding: 22px;
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
 #okmsg { font-size: 14px; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line-strong); }
+
+/* ---------- project detail modal ---------- */
+.proj-card { cursor: pointer; }
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-dialog {
+  position: relative; width: 100%; max-width: 640px; max-height: 90vh;
+  overflow-y: auto;
+  background: var(--surface); border: 1px solid var(--line-strong);
+}
+.modal-close {
+  position: absolute; top: 10px; right: 10px; z-index: 1;
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--line-strong); color: var(--ink);
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.modal-close:hover { border-color: var(--accent); color: var(--accent); }
+.modal-body { padding: 20px; }
+.modal-title {
+  font-family: 'Big Shoulders Display'; font-weight: 700; font-size: 26px;
+  text-transform: none; margin: 10px 0; line-height: 1.05;
+}
+.modal-description { margin-top: 16px; color: var(--muted); font-size: 14.5px; line-height: 1.6; border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* ---------- "show more" overflow control ---------- */
+.more-cta { display: flex; justify-content: center; margin-top: 26px; }
+
+/* ---------- sub-page header (Projects/Gallery "all" pages) ---------- */
+.subpage-hero { padding-top: 40px; }
+.subpage-hero h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 900; }
+.subpage-hero .lede { max-width: 60ch; color: var(--muted); margin-top: 14px; font-size: 16px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono'; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); text-decoration: none; margin-bottom: 18px; }
+.back-link:hover { color: var(--accent); }

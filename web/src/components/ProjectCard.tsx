@@ -2,9 +2,17 @@ import type { Project } from '@/lib/types';
 import { ImagePlate } from './ImagePlate';
 import { urlFor } from '@/lib/sanity.image';
 
-export function ProjectCard({ project, code }: { project: Project; code: string }) {
+export function ProjectCard({
+  project,
+  code,
+  onClick,
+}: {
+  project: Project;
+  code: string;
+  onClick?: () => void;
+}) {
   return (
-    <article className="proj-card">
+    <article className="proj-card" onClick={onClick}>
       <ImagePlate
         src={urlFor(project.photo, 800)}
         alt={`Site photo — ${project.title}`}
