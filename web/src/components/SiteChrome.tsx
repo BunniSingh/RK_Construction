@@ -18,7 +18,9 @@ export function SiteChrome({ children, settings }: { children: React.ReactNode; 
     <>
       <ScrollProgress />
       <Nav />
-      {children}
+      <div key={pathname} className="page-fade">
+        {children}
+      </div>
       <Footer settings={settings} />
       <MobileActionBar settings={settings} />
     </>

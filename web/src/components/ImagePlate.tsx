@@ -24,13 +24,15 @@ function Placeholder({ alt, caption }: { alt: string; caption: string }) {
 
 export function ImagePlate({ src, alt, caption, photoCaption }: Props) {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   if (!src || failed) {
     return <Placeholder alt={alt} caption={caption} />;
   }
 
   return (
-    <div className="plate plate--photo">
+    <div className={`plate plate--photo${loaded ? ' is-loaded' : ''}`}>
+      <div className="plate-skeleton" aria-hidden="true" />
       <Image
         src={src}
         alt={alt}
@@ -39,6 +41,7 @@ export function ImagePlate({ src, alt, caption, photoCaption }: Props) {
         sizes="(max-width: 700px) 100vw, 33vw"
         style={{ objectFit: 'cover' }}
         onError={() => setFailed(true)}
+        onLoad={() => setLoaded(true)}
       />
       {photoCaption && <div className="cap">{photoCaption}</div>}
     </div>

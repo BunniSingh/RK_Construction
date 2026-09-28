@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ImagePlate } from '@/components/ImagePlate';
 
 test('renders the real image when src is provided', () => {
@@ -35,4 +35,12 @@ test('shows a real caption over the real photo when photoCaption is provided', (
   render(<ImagePlate src="/photo.jpg" alt="Site photo" caption="Photo pending — X" photoCaption="Rebar & footing work — ETP site" />);
   expect(screen.getByText('Rebar & footing work — ETP site')).toBeInTheDocument();
   expect(screen.queryByText('Photo pending — X')).toBeNull();
+});
+
+test('shows a loading skeleton until the photo finishes loading', async () => {
+  const { container } = render(<ImagePlate src="/photo.jpg" alt="Site photo" caption="P-06" />);
+  expect(container.querySelector('.plate--photo')).not.toHaveClass('is-loaded');
+  const img = container.querySelector('img')!;
+  fireEvent.load(img);
+  await waitFor(() => expect(container.querySelector('.plate--photo')).toHaveClass('is-loaded'));
 });

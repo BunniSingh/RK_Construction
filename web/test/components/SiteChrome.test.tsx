@@ -31,3 +31,15 @@ test('shows Nav, Footer, and the mobile action bar on marketing pages', () => {
   expect(screen.getByRole('navigation', { name: /quick contact/i })).toBeInTheDocument();
   expect(screen.getByText('content')).toBeInTheDocument();
 });
+
+test('wraps page content in a fade-in transition on every route', () => {
+  mockUsePathname.mockReturnValue('/projects');
+  const { container } = render(
+    <SiteChrome settings={null}>
+      <div>content</div>
+    </SiteChrome>
+  );
+  const fadeWrap = container.querySelector('.page-fade');
+  expect(fadeWrap).not.toBeNull();
+  expect(fadeWrap).toHaveTextContent('content');
+});

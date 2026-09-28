@@ -17,7 +17,7 @@ export function Nav() {
     <header className="nav">
       <div className="wrap">
         <div className="brand">
-          <Image className="brand-mark" src="/logo.png" alt="R.K. Constructions logo" width={38} height={38} unoptimized />
+          <Image className="brand-mark" src="/logo.png" alt="R.K. Constructions logo" width={52} height={52} unoptimized />
           <div className="brand-text">
             <div className="name">R.K. Constructions</div>
             <div className="tag">Infra &middot; Engineering &middot; Dev.</div>
