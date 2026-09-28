@@ -1,5 +1,15 @@
+import { renderToString } from 'react-dom/server';
 import { render, screen } from '@testing-library/react';
 import { RevealGroup } from '@/components/RevealGroup';
+
+test('server-rendered HTML never includes in-view, so the client\'s first paint matches it exactly (no hydration mismatch)', () => {
+  const html = renderToString(
+    <RevealGroup className="overview-grid">
+      <p>Child</p>
+    </RevealGroup>
+  );
+  expect(html).not.toContain('in-view');
+});
 
 test('renders children visibly even before any intersection fires', () => {
   render(

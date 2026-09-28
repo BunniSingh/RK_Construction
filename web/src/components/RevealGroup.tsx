@@ -10,10 +10,19 @@ export function RevealGroup({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(typeof IntersectionObserver === 'undefined');
+  // Always false on both server and client's first render — the server has
+  // no IntersectionObserver at all, so branching on it here (as the very
+  // first version of this component did) made the client's initial render
+  // disagree with the server's, which React flags as an unrecoverable
+  // hydration mismatch. Environment-dependent behavior belongs in the
+  // effect below, which only ever runs on the client, after hydration.
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined' || !ref.current) return;
+    if (typeof IntersectionObserver === 'undefined' || !ref.current) {
+      setInView(true);
+      return;
+    }
     const el = ref.current;
     const io = new IntersectionObserver(
       (entries) => {
