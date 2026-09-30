@@ -1,6 +1,7 @@
 import './globals.css';
 import { SiteChrome } from '@/components/SiteChrome';
 import { getSiteSettings } from '@/lib/queries';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'R.K. Constructions',
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <SiteChrome settings={settings}>{children}</SiteChrome>
+        <Analytics />
       </body>
     </html>
   );
