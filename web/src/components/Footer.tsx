@@ -21,11 +21,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
       <div className="wrap footer-grid">
         <div className="footer-col footer-brand">
           <div className="brand">
-<<<<<<< HEAD
-            <Image className="brand-mark" src="/logo.png" alt="R.K. Constructions logo" width={52} height={52} unoptimized />
-=======
             <Image className="brand-mark" src="/logo.png" alt="R.K. Constructions logo" width={62} height={62} unoptimized />
->>>>>>> main
             <div className="brand-text">
               <div className="name">R.K. Constructions</div>
               <div className="tag">Infra &middot; Engineering &middot; Dev.</div>

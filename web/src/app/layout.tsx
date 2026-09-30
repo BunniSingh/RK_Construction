@@ -1,13 +1,7 @@
 import './globals.css';
-<<<<<<< HEAD
-import { SiteChrome } from '@/components/SiteChrome';
-import { getSiteSettings } from '@/lib/queries';
-import { Analytics } from '@vercel/analytics/next';
-=======
 import { Analytics } from '@vercel/analytics/next';
 import { SiteChrome } from '@/components/SiteChrome';
 import { getSiteSettings } from '@/lib/queries';
->>>>>>> main
 
 export const metadata = {
   title: 'R.K. Constructions',

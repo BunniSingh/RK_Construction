@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
->>>>>>> main
 import { StatReadout, type Stat } from './StatReadout';
 
 const STATS: Stat[] = [
@@ -13,9 +10,6 @@ const STATS: Stat[] = [
   { target: 15, suffix: '+', label: 'Engineering staff' },
 ];
 
-<<<<<<< HEAD
-export function Hero() {
-=======
 const HEADLINE_PREFIX = 'We build ';
 const HEADLINE_PHRASES = [
   'the backbone of industry.',
@@ -137,15 +131,11 @@ export function Hero() {
     };
   }, []);
 
->>>>>>> main
   return (
     <section className="hero">
       <div className="wrap hero-grid">
         <div>
           <span className="eyebrow">Raigarh, Chhattisgarh &middot; Est. one decade in industrial construction</span>
-<<<<<<< HEAD
-          <h1>We build what <span>steel</span> runs on.</h1>
-=======
           <h1 ref={headingRef} aria-label={`${HEADLINE_PREFIX}${HEADLINE_PHRASES[0]}`}>
             <span aria-hidden="true">
               <span className="headline-static">{HEADLINE_PREFIX}</span>
@@ -154,7 +144,6 @@ export function Hero() {
             </span>
           </h1>
           <span ref={measureRef} className="headline-measure" aria-hidden="true" />
->>>>>>> main
           <p className="lede">
             R.K. Constructions delivers industrial and infrastructure projects for India&apos;s steel and power
             plants — sinter plants, blast furnaces, treatment plants and the roads that connect them — on
