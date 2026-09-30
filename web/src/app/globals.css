@@ -147,7 +147,10 @@ html.js .reveal.in-view > * { opacity: 1; transform: translateY(0); }
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
+  transform: translateY(0);
+  transition: transform .3s ease;
 }
+.nav--hidden { transform: translateY(-100%); }
 .nav .wrap { display: flex; flex-wrap: wrap; row-gap: 10px; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
 .brand { display: flex; align-items: center; gap: 2px; }
 .brand-mark { width: 62px; height: 62px; flex: none; transition: transform .3s ease; }
