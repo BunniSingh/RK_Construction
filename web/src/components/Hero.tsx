@@ -32,6 +32,7 @@ const HOLD_MS = 1700;
 export function Hero() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const measureRef = useRef<HTMLSpanElement>(null);
+  const heightMeasureRef = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(HEADLINE_PHRASES[0]);
 
   // Typewriter cycle: holds on a full phrase, deletes it, types the next.
@@ -87,17 +88,40 @@ export function Hero() {
 
   // Desktop/laptop: shrink to a fixed size (sized to the longest phrase) so the
   // heading always fits one line without resizing as the phrase changes.
+  // On every width, also reserve the tallest phrase's height up front so the
+  // typewriter cycling through phrases of different lengths never changes how
+  // many lines the heading wraps to mid-animation and shifts the page below it.
   useEffect(() => {
     const heading = headingRef.current;
     const measure = measureRef.current;
-    if (!heading || !measure) return;
+    const heightMeasure = heightMeasureRef.current;
+    if (!heading || !measure || !heightMeasure) return;
     const mq = window.matchMedia(DESKTOP_QUERY);
+
+    function reserveHeight() {
+      if (!heading || !heightMeasure) return;
+      const computed = window.getComputedStyle(heading);
+      heightMeasure.style.width = `${heading.clientWidth}px`;
+      heightMeasure.style.fontSize = computed.fontSize;
+      heightMeasure.style.fontWeight = computed.fontWeight;
+      heightMeasure.style.fontFamily = computed.fontFamily;
+      heightMeasure.style.lineHeight = computed.lineHeight;
+      heightMeasure.style.letterSpacing = computed.letterSpacing;
+
+      let max = 0;
+      for (const phrase of HEADLINE_PHRASES) {
+        heightMeasure.textContent = HEADLINE_PREFIX + phrase;
+        max = Math.max(max, heightMeasure.scrollHeight);
+      }
+      heading.style.minHeight = `${max}px`;
+    }
 
     function fitOneLine() {
       if (!heading || !measure) return;
       if (!mq.matches) {
         heading.style.fontSize = '';
         heading.style.whiteSpace = '';
+        reserveHeight();
         return;
       }
       heading.style.whiteSpace = 'nowrap';
@@ -119,6 +143,7 @@ export function Hero() {
         size -= 1;
       }
       heading.style.fontSize = `${size}px`;
+      reserveHeight();
     }
 
     fitOneLine();
@@ -144,6 +169,7 @@ export function Hero() {
             </span>
           </h1>
           <span ref={measureRef} className="headline-measure" aria-hidden="true" />
+          <span ref={heightMeasureRef} className="headline-height-measure" aria-hidden="true" />
           <p className="lede">
             R.K. Constructions delivers industrial and infrastructure projects for India&apos;s steel and power
             plants — sinter plants, blast furnaces, treatment plants and the roads that connect them — on
